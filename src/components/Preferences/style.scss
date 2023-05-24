@@ -1,0 +1,14 @@
+.preferences{
+    .dropdown-menu, .preferences-dropdown {
+        background-color: #21252936;
+    }
+    .preferences-dropdown {
+        .preference-menu {
+            background-color: #6c757d;
+        }
+
+        .dropdown-item:focus, .dropdown-item:hover:hover {
+            background-color: unset;
+        }
+    }
+}
