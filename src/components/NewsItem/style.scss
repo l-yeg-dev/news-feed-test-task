@@ -1,0 +1,16 @@
+.newsItem {
+
+  &__header{
+    display: flex;
+    align-items: flex-end;
+    height: 150px;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  &__title {
+    width: 100%;
+    background-image: linear-gradient(to right, rgba(12, 29, 44, 0.68), #00000000);
+    color: #e6eff6;
+  }
+}

@@ -1,17 +1,16 @@
-import {Container, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import Preferences from "../Preferences/Preferences";
 
 
 
 const NavBar = () => {
   return(
-		<Navbar fixed="top"  bg="dark" variant="dark">
+		<Navbar sticky="top"  bg="dark" variant="dark">
 			<Container>
-				{/*<Navbar.Brand href="#home">Navbar</Navbar.Brand>*/}
-				<Nav className="me-auto">
-					<Nav.Link href="#home">Home</Nav.Link>
-				</Nav>
 				<Preferences />
+				<Button className="mx-3">
+					Logout
+				</Button>
 			</Container>
 		</Navbar>
 	)

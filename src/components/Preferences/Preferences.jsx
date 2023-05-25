@@ -6,7 +6,7 @@ const Preferences = () => {
 		 console.log(event.target.checked);
 	 }
 	return(
-		<Dropdown autoClose={false} className="preferences">
+		<Dropdown autoClose={false} className="preferences" align="end">
 			<Dropdown.Toggle id="dropdown-autoclose-false" >
 				Preferences
 			</Dropdown.Toggle>
