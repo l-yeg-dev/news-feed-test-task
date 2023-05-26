@@ -1,17 +1,20 @@
 import {Button, Container, Form, Modal, Nav, Navbar} from "react-bootstrap";
 import Preferences from "../Preferences/Preferences";
 import {useState} from "react";
+import RegistrationModal from "../modals/RegistrationModal";
 
 
 
 const NavBar = () => {
-	const [showModal, setShowModal] = useState(false);
-	const [password, setPassword] = useState(false);
-	const [email, setEmail] = useState(false);
+	const [showLoginModal, setShowLoginModal] = useState(false);
+	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('');
+	const [showRegistrationModal, setShowRegistrationModal] = useState(false);
 	const isUserAuthEd = localStorage.getItem('isLoggedIn');
 
-	const handleClose = () => setShowModal(false);
-	const handleShow = () => setShowModal(true);
+	const handleClose = () => setShowLoginModal(false);
+	const handleLoginShow = () => setShowLoginModal(true);
+	const handleShowRegisterModal = () => { setShowRegistrationModal(true); }
 	const handleLoginAttempt = () => {
 		console.log('email', email);
 		console.log('password', password);
@@ -32,14 +35,22 @@ const NavBar = () => {
 					</Button>
 					</>
 					:
-					<Button
-						className="mx-3"
-						onClick={handleShow}
-					>
-						Login
-					</Button>
+						<>
+							<Button
+								className="mx-3"
+								onClick={handleLoginShow}
+							>
+								Login
+							</Button>
+							<Button
+								className="mx-3"
+								onClick={handleShowRegisterModal}
+							>
+								Registration
+							</Button>
+						</>
 				}
-				<Modal show={showModal} onHide={handleClose}>
+				<Modal show={showLoginModal} onHide={handleClose}>
 					<Modal.Header closeButton>
 						<Modal.Title>Login</Modal.Title>
 					</Modal.Header>
@@ -82,6 +93,7 @@ const NavBar = () => {
 						</Button>
 					</Modal.Footer>
 				</Modal>
+				<RegistrationModal showModal={showRegistrationModal} toggleModal={setShowRegistrationModal} />
 			</Container>
 		</Navbar>
 	)
