@@ -2,6 +2,7 @@ import {Button, Container, Form, Modal, Nav, Navbar} from "react-bootstrap";
 import Preferences from "../Preferences/Preferences";
 import {useState} from "react";
 import RegistrationModal from "../modals/RegistrationModal";
+import { login } from "../../services/authService";
 
 
 
@@ -15,9 +16,11 @@ const NavBar = () => {
 	const handleClose = () => setShowLoginModal(false);
 	const handleLoginShow = () => setShowLoginModal(true);
 	const handleShowRegisterModal = () => { setShowRegistrationModal(true); }
-	const handleLoginAttempt = () => {
-		console.log('email', email);
-		console.log('password', password);
+
+	const handleLoginAttempt = (e) => {
+		e.preventDefault();
+
+		login(email, password);
 	};
 
 	return(
@@ -56,7 +59,7 @@ const NavBar = () => {
 					</Modal.Header>
 					<Modal.Body>
 						<h4>Fill out your credentials to login.</h4>
-						<Form>
+						<Form onSubmit={handleLoginAttempt}>
 							<Form.Group className="mb-3" controlId="formBasicEmail">
 								<Form.Label>Email address</Form.Label>
 								<Form.Control
@@ -79,19 +82,14 @@ const NavBar = () => {
 									onChange={(event) => setPassword(event.target.value)}
 								/>
 							</Form.Group>
-							<Form.Group className="mb-3" controlId="formBasicCheckbox">
+							<Form.Group className="mb-3 d-flex justify-content-between" controlId="formBasicCheckbox">
 								<Form.Check type="checkbox" label="Check me out" />
+								<Button variant="primary" type="submit">
+									Login
+								</Button>
 							</Form.Group>
 						</Form>
 					</Modal.Body>
-					<Modal.Footer>
-						<Button variant="secondary" onClick={handleClose}>
-							Close
-						</Button>
-						<Button variant="primary" onClick={handleLoginAttempt}>
-							Login
-						</Button>
-					</Modal.Footer>
 				</Modal>
 				<RegistrationModal showModal={showRegistrationModal} toggleModal={setShowRegistrationModal} />
 			</Container>

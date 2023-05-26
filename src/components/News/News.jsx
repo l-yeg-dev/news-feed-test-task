@@ -1,71 +1,30 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import {Col, Container, Row} from "react-bootstrap";
+import { getNews } from "../../services/news";
 import NewsItem from "../NewsItem/NewsItem";
 
 
 const News = () => {
+	const [news, setNews] = useState([]);
+
+	useEffect(() => {
+		getNews().then(newsRes => {
+			setNews(newsRes);
+		}).catch((error) => {console.error(error.messsage)});
+	}, []);
+
+
   return(
 		<Container >
 			<Row>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
-				<Col lg="3" md="4" xs="8">
-					<NewsItem />
-				</Col>
+				{
+					news.map((newsItem) => (
+						<Col lg="3" md="4" xs="8" key={newsItem.id}>
+							<NewsItem data={newsItem} />
+						</Col>
+					))
+				}
 			</Row>
 		</Container>
 	)
