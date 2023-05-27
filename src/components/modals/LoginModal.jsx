@@ -6,11 +6,22 @@ const LoginModal = ({showModal, toggleModal}) => {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [errors, setErrors] = useState([]);
 
-	const handleLoginAttempt = (e) => {
+	const handleLoginAttempt = async (e) => {
 		e.preventDefault();
 
-		login(email, password).then(() => toggleModal(false));
+		const logIn = await login(email, password);
+		debugger
+		if (logIn.status && logIn.status === 200) {
+			toggleModal(false)
+		} else {
+			if (logIn.status === 400) {
+				if (logIn.errors?.length !== 0) {
+					setErrors(logIn.errors)
+				}
+			}
+		}
 	};
 
 	return (
@@ -29,6 +40,7 @@ const LoginModal = ({showModal, toggleModal}) => {
 							value={email}
 							onChange={(event) => setEmail(event.target.value)}
 						/>
+						{!errors?.email?.length || errors?.email.map((error) => (<p className="text-danger p-1 m-1"> {error} </p>))}
 					</Form.Group>
 
 					<Form.Group className="mb-3" controlId="formBasicPassword">
@@ -39,10 +51,10 @@ const LoginModal = ({showModal, toggleModal}) => {
 							value={password}
 							onChange={(event) => setPassword(event.target.value)}
 						/>
+						{!errors?.password?.length || errors?.password.map((error) => (<p className="text-danger p-1 m-1"> {error} </p>))}
 					</Form.Group>
 
 					<Form.Group className="mb-3 d-flex justify-content-between" controlId="formBasicCheckbox">
-						<Form.Check type="checkbox" label="Check me out" />
 						<Button variant="primary" type="submit">
 							Login
 						</Button>

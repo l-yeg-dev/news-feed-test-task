@@ -19,13 +19,13 @@ const RegistrationModal = ({showModal, toggleModal}) => {
 			password,
 			passwordRepeat
 		}
-		const response = await register(payload)
-		if (response.status && response.status === 200) {
+		const registration = await register(payload)
+		if (registration.status && registration.status === 200) {
 			toggleModal(false)
 		} else {
-			if (response.status === 400) {
-				if (response.errors?.length !== 0) {
-					setErrors(response.errors)
+			if (registration.status === 400) {
+				if (registration.errors?.length !== 0) {
+					setErrors(registration.errors)
 				}
 			}
 		}

@@ -10,7 +10,7 @@ const NewsItem = ({data}) => {
 					className="newsItem__header"
 					style={{backgroundImage: `url(${data.imageUrl})`}}
 				>
-					<h5 className="newsItem__title p-2 text-truncate">
+					<h5 className="newsItem__title p-2 text-truncate rounded">
 						{data.title}
 					</h5>
 				</Card.Header>
