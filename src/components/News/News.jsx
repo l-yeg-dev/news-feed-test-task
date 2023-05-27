@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import { getNews } from "../../services/news";
 import NewsItem from "../NewsItem/NewsItem";
+import Search from "../Search/Search";
+import Filters from "../Filters/Filters";
 
 
 const News = () => {
@@ -17,10 +19,17 @@ const News = () => {
 
   return(
 		<Container >
+			<Search />
+			<Filters />
 			<Row>
 				{
 					news.map((newsItem) => (
-						<Col lg="3" md="4" xs="8" key={newsItem.id}>
+						<Col
+							xs={{span:10, offset:1}}
+							sm={{span:8, offset:2}}
+							md={{span:4, offset:0}}
+							xl="3"
+							key={newsItem.id}>
 							<NewsItem data={newsItem} />
 						</Col>
 					))

@@ -40,7 +40,7 @@ const LoginModal = ({showModal, toggleModal}) => {
 							value={email}
 							onChange={(event) => setEmail(event.target.value)}
 						/>
-						{!errors?.email?.length || errors?.email.map((error) => (<p className="text-danger p-1 m-1"> {error} </p>))}
+						{!errors?.email?.length || errors?.email.map((error) => (<p key={error} className="text-danger p-1 m-1"> {error} </p>))}
 					</Form.Group>
 
 					<Form.Group className="mb-3" controlId="formBasicPassword">
@@ -51,7 +51,7 @@ const LoginModal = ({showModal, toggleModal}) => {
 							value={password}
 							onChange={(event) => setPassword(event.target.value)}
 						/>
-						{!errors?.password?.length || errors?.password.map((error) => (<p className="text-danger p-1 m-1"> {error} </p>))}
+						{!errors?.password?.length || errors?.password.map((error) => (<p key={error} className="text-danger p-1 m-1"> {error} </p>))}
 					</Form.Group>
 
 					<Form.Group className="mb-3 d-flex justify-content-between" controlId="formBasicCheckbox">
