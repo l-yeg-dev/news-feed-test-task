@@ -10,13 +10,13 @@ const NewsItem = ({data}) => {
 					className="newsItem__header"
 					style={{backgroundImage: `url(${data.imageUrl})`}}
 				>
-					<h5 className="newsItem__title p-2">
-						{data.status}
+					<h5 className="newsItem__title p-2 text-truncate">
+						{data.title}
 					</h5>
 				</Card.Header>
 				<Card.Body>
 					<Card.Title>
-						{data.title}
+						<h6>{data.title}</h6>
 					</Card.Title>
 					<Card.Text>
 						{data.content}

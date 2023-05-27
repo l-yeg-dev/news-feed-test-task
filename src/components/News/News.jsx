@@ -10,10 +10,10 @@ const News = () => {
 
 	useEffect(() => {
 		getNews().then(newsRes => {
-			setNews(newsRes);
+			console.log(newsRes);
+			setNews(newsRes.data.news);
 		}).catch((error) => {console.error(error.messsage)});
 	}, []);
-
 
   return(
 		<Container >
