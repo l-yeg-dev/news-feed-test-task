@@ -1,5 +1,5 @@
 import { api } from "../config/api";
 
-export function getNews() {
-  return api.get('/news');
+export function getNews({filters}) {
+  return api.get('/news', {params: {...filters}});
 }

@@ -27,7 +27,7 @@ const NavBar = () => {
 
 	return(
 		<Navbar sticky="top"  bg="dark" variant="dark">
-			<Container>
+			<Container fluid>
 				<Nav className="me-auto">
 					<Nav.Link href="/#">Home</Nav.Link>
 				</Nav>

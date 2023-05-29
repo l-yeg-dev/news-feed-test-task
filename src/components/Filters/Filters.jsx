@@ -1,17 +1,20 @@
 import {Col, Container, Dropdown, DropdownButton, InputGroup, Row} from "react-bootstrap";
 import DatePicker from "react-datepicker";
-import {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import "./style.scss"
+import {useEffect, useState} from "react";
+import {getPreferences} from "../../services/preferences";
 
-
-const Filters = () => {
-	const [selectedCategory, setSelectedCategory] = useState(null);
-	const [selectedSource, setSelectedSource] = useState(null);
-	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState(null);
-
-	const handleCategorySelect = (event) => setSelectedCategory(event.target.innerHTML)
-	const handleSourceSelect = (event) => setSelectedSource(event.target.innerHTML)
+const Filters = ({filters, updateFilters}) => {
+	const [filterData, setFilterData] = useState({categories: [], sources: []})
+	useEffect(() => {
+		getPreferences().then(result => {
+			setFilterData({
+				categories: result.categories,
+				sources: result.sources
+			});
+		})
+	},[]);
 
   return (
 		<Container className="filters">
@@ -20,13 +23,18 @@ const Filters = () => {
 					<InputGroup className="mb-3 d-block text-center">
 						<DropdownButton
 							variant="outline-secondary"
-							title={selectedCategory || 'Select category'}
+							title={filterData.categories.find(category => category.id.toString() === filters.category)?.name || 'Select category'}
 							id="input-group-dropdown-1"
-							onChange={handleCategorySelect}
 						>
-							<Dropdown.Item onClick={handleCategorySelect} value="Cat 1">Cat 1</Dropdown.Item>
-							<Dropdown.Item href="#">Cat 2</Dropdown.Item>
-							<Dropdown.Item href="#">Cat 3</Dropdown.Item>
+							{filterData.categories.map(category => (
+								<Dropdown.Item
+									key={`filter-category-${category.id}`}
+									data-category-id={category.id}
+									onClick={(e) => updateFilters({...filters, category: e.target.dataset.categoryId})}
+								>
+									{category.name}
+								</Dropdown.Item>
+							))}
 						</DropdownButton>
 					</InputGroup>
 				</Col>
@@ -34,20 +42,32 @@ const Filters = () => {
 					<InputGroup className="mb-3 d-block text-center">
 						<DropdownButton
 							variant="outline-secondary"
-							title={selectedSource || 'Select source'}
+							title={filterData.sources.find(source => source.id.toString() === filters.source)?.name  || 'Select source'}
 							id="input-group-dropdown-1"
 						>
-							<Dropdown.Item onClick={handleSourceSelect} href="#">Source 1</Dropdown.Item>
-							<Dropdown.Item onClick={handleSourceSelect} href="#">Source 2</Dropdown.Item>
-							<Dropdown.Item onClick={handleSourceSelect} href="#">Source 3</Dropdown.Item>
+							{filterData.sources.map(source => (
+								<Dropdown.Item
+									key={`filter-source-${source.id}`}
+									data-source-id={source.id}
+									onClick={(e) => updateFilters({...filters, source: e.target.dataset.sourceId})}
+								>
+									{source.name}
+								</Dropdown.Item>
+							))}
 						</DropdownButton>
 					</InputGroup>
 				</Col>
 				<Col xs="12" lg="4"  className="text-center">
 					<div className="text-center">From date</div>
-					<DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+					<DatePicker
+						selected={filters.date.startDate}
+						onChange={(newDate) => updateFilters({...filters, date: {...filters.date, startDate: newDate}})}
+					/>
 					<div className="text-center">To date</div>
-					<DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+					<DatePicker
+						selected={filters.date.endDate}
+						onChange={(newDate) => updateFilters({...filters, date: {...filters.date, endDate: newDate}})}
+					/>
 				</Col>
 			</Row>
 		</Container>

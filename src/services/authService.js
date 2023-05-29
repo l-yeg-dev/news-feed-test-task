@@ -2,9 +2,8 @@ import { api } from "../config/api";
 
 export async function login(email, password) {
   return await api.post('/auth/login', {email, password})
-    .then((data) => {
-      localStorage.setItem('authToken', data.token);
-      debugger
+    .then((response) => {
+      localStorage.setItem('authToken', response.data.token);
 
       return {
         status: 200,

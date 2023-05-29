@@ -12,13 +12,12 @@ const LoginModal = ({showModal, toggleModal}) => {
 		e.preventDefault();
 
 		const logIn = await login(email, password);
-		debugger
 		if (logIn.status && logIn.status === 200) {
-			toggleModal(false)
+			toggleModal(false);
 		} else {
 			if (logIn.status === 400) {
 				if (logIn.errors?.length !== 0) {
-					setErrors(logIn.errors)
+					setErrors(logIn.errors);
 				}
 			}
 		}

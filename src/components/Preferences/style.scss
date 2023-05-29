@@ -1,10 +1,11 @@
 .preferences{
     .dropdown-menu, .preferences-dropdown {
-        background-color: #21252936;
+        background-color: #212529;
     }
     .preferences-dropdown {
         .preference-menu {
             background-color: #6c757d;
+            padding: 16px 16px 0 16px;
         }
 
         .dropdown-item:focus, .dropdown-item:hover:hover {

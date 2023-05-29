@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Slider from "./components/Slider/Slider";
 
 const App = () => {
+
   return (
     <>
       <NavBar />

@@ -1,4 +1,4 @@
-import {Button, Card, Container} from "react-bootstrap";
+import {Card, Container} from "react-bootstrap";
 import './style.scss'
 
 
@@ -13,6 +13,9 @@ const NewsItem = ({data}) => {
 					<h5 className="newsItem__title p-2 text-truncate rounded">
 						{data.title}
 					</h5>
+					<div className="text-end">
+						<p className="badge bg-primary">{data.author.name}</p>
+					</div>
 				</Card.Header>
 				<Card.Body>
 					<Card.Title>
@@ -21,9 +24,9 @@ const NewsItem = ({data}) => {
 					<Card.Text>
 						{data.content}
 					</Card.Text>
-					<Button variant="primary">
-						{data.link}
-					</Button>
+					<a href={data.url} target="_blank" className="btn btn-primary btn-sm" rel="noreferrer" >
+						Open Article
+					</a>
 				</Card.Body>
 			</Card>
 		</Container>
