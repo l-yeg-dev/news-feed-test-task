@@ -18,7 +18,7 @@ const Filters = ({filters, updateFilters}) => {
 
   return (
 		<Container className="filters">
-			<Row className="align-items-center border rounded py-3">
+			<Row className="align-items-center border border-top-0 rounded py-3">
 				<Col xs="12" sm="6" lg="4">
 					<InputGroup className="mb-3 d-block text-center">
 						<DropdownButton

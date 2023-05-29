@@ -13,9 +13,13 @@ const NewsItem = ({data}) => {
 					<h5 className="newsItem__title p-2 text-truncate rounded">
 						{data.title}
 					</h5>
-					<div className="text-end">
-						<p className="badge bg-primary">{data.author.name}</p>
-					</div>
+					{
+						data.author &&
+						<div className="text-end">
+							<p className="badge bg-primary">{data.author.name}</p>
+						</div>
+					}
+
 				</Card.Header>
 				<Card.Body>
 					<Card.Title>

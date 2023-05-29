@@ -19,8 +19,8 @@ export async function login(email, password) {
 }
 export async function register(payload) {
   return await api.post('/auth/register', payload)
-    .then((data)=>{
-      localStorage.setItem('authToken', data.token);
+    .then((response)=>{
+      localStorage.setItem('authToken', response.data.token);
 
       return {
         status: 200,

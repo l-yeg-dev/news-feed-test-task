@@ -17,7 +17,7 @@ const RegistrationModal = ({showModal, toggleModal}) => {
 			lastName,
 			email,
 			password,
-			passwordRepeat
+			password_confirmation: passwordRepeat
 		}
 		const registration = await register(payload)
 		if (registration.status && registration.status === 200) {
@@ -81,14 +81,13 @@ const RegistrationModal = ({showModal, toggleModal}) => {
 					</Form.Group>
 
 					<Form.Group className="mb-3" controlId="formPasswordRepeat">
-						<Form.Label>Password</Form.Label>
+						<Form.Label>Password Confirmation</Form.Label>
 						<Form.Control
 							type="password"
 							placeholder="Repeat password"
 							value={passwordRepeat}
 							onChange={(event) => setPasswordRepeat(event.target.value)}
 						/>
-						{!errors?.passwordRepeat?.length || errors?.passwordRepeat.map((error) => (<p key={error} className="text-danger p-1 m-1"> {error} </p>))}
 					</Form.Group>
 				</Form>
 			</Modal.Body>

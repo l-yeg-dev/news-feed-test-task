@@ -1,0 +1,7 @@
+services:
+  app:
+    container_name: news-feed-react
+    build:
+      context: .
+    ports:
+      - 3000:3000
